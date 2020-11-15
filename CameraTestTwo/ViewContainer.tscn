@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ViewContainer.gd" type="Script" id=1]
+
+[node name="ViewContainer" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="View1" type="ReferenceRect" parent="."]
+margin_left = -192.0
+margin_top = -192.0
+margin_right = 192.0
+margin_bottom = 192.0
+
+[node name="View2" type="ReferenceRect" parent="."]
+margin_left = 192.0
+margin_top = -192.0
+margin_right = 576.0
+margin_bottom = 192.0

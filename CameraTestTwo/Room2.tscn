@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Room2" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -192, -32, -192, -384, 256, -384, 256, 320, -192, 320, -192, 32, -128, 32, -168, 288, -16, 280, 224, 264, 232, -128, 128, -352, -24, -360, -160, -320, -128, -32 )
+
+[node name="UpLeft" type="Position2D" parent="."]
+position = Vector2( -192, -384 )
+
+[node name="DownRight" type="Position2D" parent="."]
+position = Vector2( 256, 320 )

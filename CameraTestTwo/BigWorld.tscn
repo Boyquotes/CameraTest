@@ -7,7 +7,7 @@
 [ext_resource path="res://ViewContainer.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 24 )
+extents = Vector2( 4, 24 )
 
 [node name="BigWorld" type="Node"]
 
@@ -26,16 +26,17 @@ margin_right = 640.0
 margin_bottom = 320.0
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
+transition_time = 1.0
 start_delay = 0.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 192, 0 )
+position = Vector2( 168, 0 )
 shape = SubResource( 1 )
 [connection signal="area_entered" from="Area2D" to="Player" method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Area2D" to="Camera2D" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D" to="Camera2D" method="_on_Area2D_body_entered"]
 
 [editable path="ViewContainer"]

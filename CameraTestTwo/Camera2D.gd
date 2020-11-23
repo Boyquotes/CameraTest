@@ -46,13 +46,14 @@ func _on_Area2D_body_entered(body):
 #	process_value = false
 #	set_process(false)
 #	self.current = false
-	player.pause()
+	
 	### ###
 	
 	start_transition_tween()
 	
 	yield(tween, "tween_started")
 	remove_camera_limits()
+	player.start_transition_tween()
 	
 	yield(tween, "tween_all_completed")
 	tween_done()
@@ -76,6 +77,9 @@ func start_transition_tween():
 #	print('Camera\'s \"screen center\": ', self.get_camera_screen_center())
 #	print('Viewport\'s size: ', get_viewport_rect())
 #	print('The visible viewport rect: ', get_visible_rect())
+
+	player.pause()
+	self.set_process(false)
 	
 		
 	tween.interpolate_property(
@@ -85,7 +89,7 @@ func start_transition_tween():
 		view2.get_global_rect().position.x + view2.get_rect().size.x,
 		transition_time,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
+		Tween.EASE_IN_OUT,
 		start_delay)
 		
 	tween.interpolate_property(
@@ -95,7 +99,7 @@ func start_transition_tween():
 		view2.get_global_rect().position.x, 
 		transition_time,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
+		Tween.EASE_IN_OUT,
 		start_delay)
 
 	tween.interpolate_property(
@@ -105,7 +109,7 @@ func start_transition_tween():
 		view2.get_global_rect().position.y,
 		transition_time,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
+		Tween.EASE_IN_OUT,
 		start_delay)
 
 	tween.interpolate_property(
@@ -115,7 +119,7 @@ func start_transition_tween():
 		view2.get_global_rect().position.y + view2.get_rect().size.y,
 		transition_time,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_IN,
+		Tween.EASE_IN_OUT,
 		start_delay)
 		
 	# This part moves the camera itself... I think.
@@ -123,7 +127,7 @@ func start_transition_tween():
 		self, 
 		"position",
 		self.position, 
-		self.global_position.x + get_viewport_rect().size.x, 
+		Vector2(view2.get_global_rect().position.x + (get_viewport_rect().size.x/2), self.global_position.y), 
 		transition_time,
 		Tween.TRANS_LINEAR, 
 		Tween.EASE_IN_OUT)
@@ -132,6 +136,6 @@ func start_transition_tween():
 	tween.start()
 	
 func tween_done():
-	process_value = true
+	self.set_process(true)
 	vc.update_current_view(self)
 	player.unpause()

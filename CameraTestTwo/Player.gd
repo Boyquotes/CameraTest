@@ -1,8 +1,6 @@
 extends KinematicBody2D
 
 onready var tween = $Tween
-onready var camera = get_node('../Camera2D')
-onready var cam_tween = camera.get_node('Tween')
 
 export (int) var speed = 200
 
@@ -32,26 +30,18 @@ func get_input():
 		
 	velocity = velocity.normalized() * speed
 
-
-#func _on_Camera2D_boundary_broken():
-#	self.global_position.x += 10
-#	print('Player\'s new position: ', self.global_position)
-
-func _on_Area2D_body_entered(body):
+func start_transition_tween():
 	
-#	print('There\'s a Player in here!')
-#	pause()
 	tween.interpolate_property(
-		body, 
+		self, 
 		"position",
-		body.position.x, 
-		body.position.x + 300, 
+		self.position, 
+		Vector2(get_node('../ViewContainer/View2').get_global_rect().position.x + 35, self.position.y), 
 		1,
 		Tween.TRANS_LINEAR, 
-		Tween.EASE_IN_OUT)
+		Tween.EASE_IN)
 
 	tween.start()
-
 
 func pause() -> void:
 	print('Player should be paused')
@@ -63,5 +53,3 @@ func unpause() -> void:
 	set_physics_process(true)
 	set_process_unhandled_input(true)
 
-#func _on_Tween_tween_all_completed():
-#	unpause()
